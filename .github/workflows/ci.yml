@@ -16,3 +16,8 @@ jobs:
           cache: maven
       - name: Create jar with maven
         run: mvn install --file pom.xml
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: devops-jar
+          path: target/my-app.jar
