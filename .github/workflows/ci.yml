@@ -15,7 +15,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Create jar with maven
-        run: mvn install --file pom.xml
+        run: mvn clean package --file pom.xml
+      - name: Create target directory
+        run: mkdir target
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
