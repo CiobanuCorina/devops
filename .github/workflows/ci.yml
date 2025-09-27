@@ -8,4 +8,4 @@ jobs:
 
     steps:
       - name: Create jar with maven
-        run: mvn install
+        run: mvn install --file ../../pom.xml
