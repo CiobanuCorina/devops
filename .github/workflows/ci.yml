@@ -1,0 +1,11 @@
+name: Maven Package
+
+on: push
+
+jobs:
+  build_jar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create jar with maven
+        run: mvn -install --file pom.xml
