@@ -16,10 +16,8 @@ jobs:
           cache: maven
       - name: Create jar with maven
         run: mvn clean package --file pom.xml
-      - name: Create target directory
-        run: mkdir test
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: devops-jar
-          path: test/*.jar
+          path: target/*.jar
