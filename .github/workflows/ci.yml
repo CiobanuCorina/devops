@@ -4,6 +4,8 @@ on: push
 
 jobs:
   sonar_scan:
+    permissions:
+      contents: write
     uses: ./.github/workflows/sonar.yml
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
