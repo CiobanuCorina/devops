@@ -1,6 +1,10 @@
 name: SonarQube Scan
 
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        required: true
 
 jobs:
   sonar_scan:

@@ -3,9 +3,13 @@ name: Maven Package
 on: push
 
 jobs:
+  sonar_scan:
+    uses: ./.github/workflows/sonar.yml
+    with:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build_jar:
+    needs: sonar_scan
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -14,8 +18,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: SonarQube Scan
-        uses: ./.github/workflows/sonar.yml
       - name: Create jar with maven
         run: mvn clean package --file pom.xml
       - name: Upload JAR artifact
