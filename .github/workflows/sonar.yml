@@ -11,12 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test
-        run: echo "TOKEN is ${{ github.event.secrets.SONAR_TOKEN }}"
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6.0.0
         env:
-          SONAR_TOKEN: ${{ github.event.secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
