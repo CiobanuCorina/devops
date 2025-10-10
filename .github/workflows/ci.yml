@@ -5,7 +5,7 @@ on: push
 jobs:
   sonar_scan:
     uses: ./.github/workflows/sonar.yml
-    with:
+    secrets:
       token: ${{ secrets.SONAR_TOKEN }}
   build_jar:
     needs: sonar_scan
