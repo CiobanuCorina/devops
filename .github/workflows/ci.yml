@@ -6,7 +6,7 @@ jobs:
   sonar_scan:
     uses: ./.github/workflows/sonar.yml
     secrets:
-      token: ${{ secrets.SONAR_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build_jar:
     needs: sonar_scan
     runs-on: ubuntu-latest
