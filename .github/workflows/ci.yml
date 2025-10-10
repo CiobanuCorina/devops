@@ -14,6 +14,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: SonarQube Scan
+        uses: ./.github/workflows/sonar.yml
       - name: Create jar with maven
         run: mvn clean package --file pom.xml
       - name: Upload JAR artifact
