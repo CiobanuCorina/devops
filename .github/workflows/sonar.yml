@@ -18,7 +18,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.artifact-name }}
-          path: target/classes
+          path: .
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
