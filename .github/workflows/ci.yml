@@ -3,14 +3,7 @@ name: Maven Package
 on: push
 
 jobs:
-  sonar_scan:
-    permissions:
-      contents: write
-    uses: ./.github/workflows/sonar.yml
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   build_jar:
-    needs: sonar_scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,4 +19,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: devops-jar
-          path: target/*.jar
+          path: target/
+  sonar_scan:
+    needs: build_jar
+    uses: ./.github/workflows/sonar.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
