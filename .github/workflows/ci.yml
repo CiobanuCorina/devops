@@ -25,3 +25,5 @@ jobs:
     uses: ./.github/workflows/sonar.yml
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    with:
+      artifact-name: target

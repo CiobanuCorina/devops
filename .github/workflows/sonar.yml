@@ -2,6 +2,10 @@ name: SonarQube Scan
 
 on:
   workflow_call:
+    inputs:
+      artifact-name:
+        required: true
+        type: string
     secrets:
       SONAR_TOKEN:
         required: true
@@ -13,7 +17,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: target
+          name: ${{ inputs.artifact-name }}
           path: target/classes
       - uses: actions/checkout@v4
         with:
