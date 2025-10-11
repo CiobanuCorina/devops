@@ -13,8 +13,8 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: devops-jar
-          path: target
+          name: target
+          path: target/classes
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -25,4 +25,4 @@ jobs:
         with:
           args: >
             -Dsonar.sources=src/main/java
-            -Dsonar.java.binaries=target
+            -Dsonar.java.binaries=target/classes
