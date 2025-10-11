@@ -24,7 +24,7 @@ jobs:
           path: .
       - name: Show downloaded files (debug)
         run: |
-            cd home/runner/work/devops/devops
+            cd /home/runner/work/devops/devops
             echo "Listing repo root:"
             ls -la
       - name: SonarQube Scan
