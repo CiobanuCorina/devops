@@ -32,3 +32,5 @@ jobs:
       - uses: ./.github/actions/sonar
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          projectKey: CiobanuCorina_devops
+          organization: ciobanucorina

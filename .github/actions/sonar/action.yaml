@@ -9,5 +9,7 @@ runs:
         args: >
           -Dsonar.sources=src/main/java
           -Dsonar.java.binaries=target/classes
+          -Dsonar.projectKey=${{ inputs.projectKey }}
+          -Dsonar.organization=${{ inputs.organization }}
       env:
         SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
