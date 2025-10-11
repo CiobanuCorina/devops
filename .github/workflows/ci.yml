@@ -22,8 +22,13 @@ jobs:
           path: target/classes
   sonar_scan:
     needs: build_jar
-    uses: ./.github/workflows/sonar.yml
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    with:
-      artifact-name: target
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: target
+          path: target/classes
+      - uses: ./.github/actions/sonar
+        with:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
