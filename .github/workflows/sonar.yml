@@ -24,12 +24,9 @@ jobs:
           path: .
       - name: Show downloaded files (debug)
         run: |
+            cd home/runner/work/devops/devops
             echo "Listing repo root:"
             ls -la
-            echo "Listing target:"
-            ls -la target || true
-            echo "Listing target/classes:"
-            ls -la target/classes || true
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6.0.0
         env:
