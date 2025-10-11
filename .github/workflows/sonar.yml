@@ -14,6 +14,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: devops-jar
+          path: target
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -22,4 +23,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: target/
+          args: >
+            -Dsonar.sources=src/main/java
+            -Dsonar.java.binaries=target
