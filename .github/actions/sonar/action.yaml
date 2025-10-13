@@ -11,5 +11,6 @@ runs:
           -Dsonar.java.binaries=target/classes
           -Dsonar.projectKey=${{ inputs.projectKey }}
           -Dsonar.organization=${{ inputs.organization }}
+          -Dsonar.exclusions=**/DevopsApplication.java
       env:
         SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
