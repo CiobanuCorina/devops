@@ -13,13 +13,13 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Create jar with maven
-        run: mvn clean package --file pom.xml
-      - name: Upload JAR artifact
+      - name: Maven verify
+        run: mvn clean verify --file pom.xml
+      - name: Upload target
         uses: actions/upload-artifact@v4
         with:
           name: target
-          path: target/classes
+          path: target
   sonar_scan:
     needs: build_jar
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: target
-          path: target/classes
+          path: target
       - uses: ./.github/actions/sonar
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
