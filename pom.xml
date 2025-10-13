@@ -87,7 +87,7 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/DevopsApplication.*</exclude>
+                        <exclude>src/main/java/com/devops/devops/DevopsApplication.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
