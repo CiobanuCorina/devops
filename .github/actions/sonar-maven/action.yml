@@ -1,0 +1,8 @@
+name: "Run Sonar Scan"
+description: "Run Sonar Scan through maven"
+runs:
+  using: "composite"
+  steps:
+    - name: SonarQube Scan
+      shell: bash
+      run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=${{ inputs.SONAR_TOKEN }}

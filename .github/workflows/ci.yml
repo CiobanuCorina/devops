@@ -31,11 +31,11 @@ jobs:
         with:
           name: target
           path: target
-      - uses: ./.github/actions/sonar
+      - uses: ./.github/actions/sonar-maven
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          projectKey: CiobanuCorina_devops
-          organization: ciobanucorina
+#          projectKey: CiobanuCorina_devops
+#          organization: ciobanucorina
   docker_build:
     needs: build_jar
     runs-on: ubuntu-latest
