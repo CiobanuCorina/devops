@@ -1,5 +1,15 @@
 name: "Run Sonar Scan"
 description: "Run Sonar Scan through maven"
+inputs:
+  SONAR_TOKEN:
+    required: true
+    description: "Sonar token"
+  projectKey:
+    description: "Project key for sonar"
+    required: true
+  organization:
+    description: "Organization name in Sonar"
+    required: true
 runs:
   using: "composite"
   steps:

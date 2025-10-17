@@ -1,5 +1,12 @@
 name: "Docker Build"
 description: "Run Docker Build and Push"
+inputs:
+  DOCKERHUB_USERNAME:
+    description: "Docker Hub username"
+    required: true
+  DOCKERHUB_TOKEN:
+    description: "Docker Hub token"
+    required: true
 runs:
   using: "composite"
   steps:

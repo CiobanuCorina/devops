@@ -34,8 +34,8 @@ jobs:
       - uses: ./.github/actions/sonar-maven
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          projectKey: CiobanuCorina_devops
-          organization: ciobanucorina
+          projectKey: ${{ vars.SONAR_PROJECT_KEY }}
+          organization: ${{ vars.SONAR_ORGANIZATION }}
   docker_build:
     needs: sonar_scan
     runs-on: ubuntu-latest
