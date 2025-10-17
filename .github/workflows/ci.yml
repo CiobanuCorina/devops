@@ -34,10 +34,10 @@ jobs:
       - uses: ./.github/actions/sonar-maven
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#          projectKey: CiobanuCorina_devops
-#          organization: ciobanucorina
+          projectKey: CiobanuCorina_devops
+          organization: ciobanucorina
   docker_build:
-    needs: build_jar
+    needs: sonar_scan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
