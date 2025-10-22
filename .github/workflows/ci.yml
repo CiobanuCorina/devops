@@ -42,7 +42,7 @@ jobs:
           projectKey: ${{ vars.SONAR_PROJECT_KEY }}
           organization: ${{ vars.SONAR_ORGANIZATION }}
   docker_build:
-    needs: sonar_scan
+    needs: [build_jar, sonar_scan]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
