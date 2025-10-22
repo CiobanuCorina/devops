@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/ci.yml
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
