@@ -25,6 +25,13 @@ jobs:
         run: |
           scp -i ~/.ssh/id_rsa -r ./helm-chart ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
         shell: bash
+      - name: Install Helm on VM (if not already installed)
+        run: |
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
+            if ! command -v helm &> /dev/null; then
+              curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            fi
+          EOF
       - name: Deploy Helm Chart on VM
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
