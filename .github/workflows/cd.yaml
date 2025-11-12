@@ -13,5 +13,31 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Render Deploy
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      - uses: actions/checkout@v4
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.VM_HOST }} >> ~/.ssh/known_hosts
+      - name: Copy Helm chart to VM
+        run: |
+          scp -r ./helm-chart ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
+      - name: Deploy Helm Chart on VM
+        run: |
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
+          export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+          sudo helm upgrade --install my-release ~/helm-chart \
+            --namespace default \
+            --create-namespace \
+            --wait \
+            --timeout 5m \
+            --set image.tag=${{ github.sha }}
+
+          sudo kubectl get pods -n default
+          sudo kubectl get services -n default
+          EOF
+#    steps:
+#      - name: Trigger Render Deploy
+#        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
