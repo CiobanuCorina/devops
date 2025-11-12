@@ -25,27 +25,20 @@ jobs:
         run: |
           scp -i ~/.ssh/id_rsa -r ./helm-chart ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
         shell: bash
-      - name: Install Helm on VM (if not already installed)
-        run: |
-          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
-            if ! command -v helm &> /dev/null; then
-              curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-            fi
-          EOF
       - name: Deploy Helm Chart on VM
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
-          sudo helm upgrade --install my-release ~/helm-chart \
+          helm upgrade --install my-release ~/helm-chart \
             --namespace default \
             --create-namespace \
             --wait \
             --timeout 5m \
             --set image.tag=${{ github.sha }}
 
-          sudo kubectl get pods -n default
-          sudo kubectl get services -n default
+          kubectl get pods -n default
+          kubectl get services -n default
           EOF
         shell: bash
 #    steps:
