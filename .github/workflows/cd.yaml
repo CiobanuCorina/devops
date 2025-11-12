@@ -19,6 +19,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          cat ~/.ssh/id_rsa
       - name: Copy Helm chart to VM
         run: |
           scp -i ~/.ssh/id_rsa -r ./helm-chart ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
