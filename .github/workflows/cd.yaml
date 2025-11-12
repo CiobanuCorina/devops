@@ -19,10 +19,11 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          cat ~/.ssh/id_rsa
+        shell: bash
       - name: Copy Helm chart to VM
         run: |
           scp -i ~/.ssh/id_rsa -r ./helm-chart ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
+        shell: bash
       - name: Deploy Helm Chart on VM
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
@@ -38,6 +39,7 @@ jobs:
           sudo kubectl get pods -n default
           sudo kubectl get services -n default
           EOF
+        shell: bash
 #    steps:
 #      - name: Trigger Render Deploy
 #        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
