@@ -21,7 +21,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - name: Copy Helm chart to VM
         run: |
-          scp -r ./helm-chart -i ~/.ssh/id_rsa ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
+          scp -i ~/.ssh/id_rsa -r ./helm-chart ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
       - name: Deploy Helm Chart on VM
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
