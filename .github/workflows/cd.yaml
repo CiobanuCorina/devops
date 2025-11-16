@@ -14,33 +14,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup SSH
+      - name: Configure OCI CLI and Kubectl for OKE
+        uses: oracle-actions/configure-kubectl-oke@v1.5.0
+        with:
+          cluster: ${{ secrets.OKE_CLUSTER_OCID }}
+      - name: Verify cluster connection
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.VM_HOST }} >> ~/.ssh/known_hosts
-        shell: bash
-      - name: Copy Helm chart to VM
-        run: |
-          scp -i ~/.ssh/id_rsa -r ./helm-chart ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/
-        shell: bash
-      - name: Deploy Helm Chart on VM
-        run: |
-          ssh -i ~/.ssh/id_rsa ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
-          export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+          kubectl cluster-info
+          kubectl get nodes
 
-          helm upgrade --install my-release ~/helm-chart \
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: '3.12.0'
+
+      - name: Deploy Helm chart
+        run: |
+          helm upgrade --install release1 ~/helm-chart \
             --namespace default \
             --create-namespace \
             --wait \
             --timeout 5m \
             --set image.tag=${{ github.sha }}
 
-          kubectl get pods -n default
-          kubectl get services -n default
-          EOF
-        shell: bash
+      - name: Verify deployment
+        run: |
+          echo "=== Helm Release Status ==="
+          helm status release1 --namespace default
+          
+          echo ""
+          echo "=== Pods ==="
+          kubectl get pods --namespace default -l app.kubernetes.io/name=deployment-test
+          
+          echo ""
+          echo "=== Services ==="
+          kubectl get svc --namespace default
+          
+          echo ""
+          echo "=== Deployment Status ==="
+          kubectl rollout status deployment/release1 --namespace default
 #    steps:
 #      - name: Trigger Render Deploy
 #        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}

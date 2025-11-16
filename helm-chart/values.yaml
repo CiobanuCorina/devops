@@ -1,5 +1,5 @@
 name: deployment-test
-namespace: test
+namespace: default
 env:
   port: "8080"
 image:
