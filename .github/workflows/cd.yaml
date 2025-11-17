@@ -58,7 +58,7 @@ jobs:
           
           echo ""
           echo "=== Deployment Status ==="
-          kubectl rollout status deployment/release1 --namespace default
+          kubectl rollout status deployment/deployment-test --namespace default
 #    steps:
 #      - name: Trigger Render Deploy
 #        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
