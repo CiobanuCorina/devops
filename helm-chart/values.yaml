@@ -3,7 +3,7 @@ namespace: default
 env:
   port: "8080"
 image:
-  repository: https://hub.docker.com/repository/docker/baisnake/devops
+  repository: https://hub.docker.com/r/baisnake/devops
   tag: latest
 container:
   port: 8080
