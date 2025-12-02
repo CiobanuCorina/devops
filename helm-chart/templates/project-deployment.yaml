@@ -29,12 +29,14 @@ spec:
               port: {{ .Values.container.port }}
             initialDelaySeconds: 10
             periodSeconds: 10
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
               port: {{ .Values.container.port }}
             initialDelaySeconds: 15
             periodSeconds: 15
+            failureThreshold: 3
           resources:
             requests:
               memory: "512Mi"
