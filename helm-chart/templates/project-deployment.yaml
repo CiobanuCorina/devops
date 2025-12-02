@@ -25,14 +25,14 @@ spec:
             - containerPort: {{ .Values.container.port }}
           readinessProbe:
             httpGet:
-              path: /actuator/health/readiness
+              path: "/actuator/health/readiness"
               port: {{ .Values.container.port }}
             initialDelaySeconds: 10
             periodSeconds: 10
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: "/actuator/health/liveness"
               port: {{ .Values.container.port }}
             initialDelaySeconds: 15
             periodSeconds: 15
