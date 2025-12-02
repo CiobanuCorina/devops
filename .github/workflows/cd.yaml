@@ -35,7 +35,7 @@ jobs:
           version: '3.12.0'
 
       - name: Helm clear release
-        run: helm uninstall release1 --ignore-not-found
+        run: helm status release1 && helm uninstall release1
 
       - name: Deploy Helm chart
         run: |
