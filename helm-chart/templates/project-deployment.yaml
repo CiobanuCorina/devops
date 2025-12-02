@@ -27,14 +27,14 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: {{ .Values.container.port }}
-            initialDelaySeconds: 5
-            periodSeconds: 5
+            initialDelaySeconds: 10
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
               port: {{ .Values.container.port }}
-            initialDelaySeconds: 10
-            periodSeconds: 10
+            initialDelaySeconds: 15
+            periodSeconds: 15
           resources:
             requests:
               memory: "512Mi"
