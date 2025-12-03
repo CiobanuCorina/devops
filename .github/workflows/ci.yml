@@ -5,6 +5,10 @@ on:
     branches-ignore:
       - main
   workflow_call:
+    outputs:
+      image-tags:
+        description: "Docker image tags"
+        value: ${{ jobs.docker_build_non_master.outputs.image-tags }}
 
 jobs:
   build_jar:
