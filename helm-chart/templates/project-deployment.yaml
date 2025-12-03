@@ -20,7 +20,7 @@ spec:
       containers:
         - name: deployment-test
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.container.port }}
           readinessProbe:
