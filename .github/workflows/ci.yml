@@ -64,6 +64,8 @@ jobs:
         with:
           name: target
           path: target
+      - name: Copy Dockerfile into target
+        run: cp Dockerfile target/
       - name: Build Docker image
         uses: ./.github/actions/docker
         with:
