@@ -64,8 +64,8 @@ jobs:
         with:
           name: target
           path: target
-      - name: Copy Dockerfile into target
-        run: cp Dockerfile target/
+      - name: Move JAR to context root
+        run: cp target/devops-0.0.1-SNAPSHOT.jar .
       - name: Build Docker image
         uses: ./.github/actions/docker
         with:
