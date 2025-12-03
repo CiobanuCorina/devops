@@ -62,7 +62,7 @@ jobs:
     needs: build_jar
     runs-on: ubuntu-latest
     outputs:
-      image-tags: ${{ steps.meta.outputs.tags }}
+      image-tags: ${{ steps.docker.outputs.tags }}
     if: github.ref != 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
@@ -70,7 +70,8 @@ jobs:
         with:
           name: target
           path: target
-      - name: Build Docker image
+      - id: docker
+        name: Build Docker image
         uses: ./.github/actions/docker
         with:
           DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
