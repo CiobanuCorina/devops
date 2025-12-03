@@ -18,9 +18,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Maven build
-        run: mvn clean install --file pom.xml -Dmaven.test.skip=true
-      - name: Run tests
-        run: mvn verify --file pom.xml
+        run: mvn clean install --file pom.xml
       - name: Upload target
         uses: actions/upload-artifact@v4
         with:
