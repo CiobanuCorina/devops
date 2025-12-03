@@ -59,6 +59,9 @@ jobs:
           DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   docker_build_non_master:
+    strategy:
+      matrix:
+        environment: [ dev, qa ]
     needs: build_jar
     runs-on: ubuntu-latest
     outputs:
