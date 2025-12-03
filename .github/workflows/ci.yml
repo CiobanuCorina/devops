@@ -57,6 +57,8 @@ jobs:
   docker_build_non_master:
     needs: build_jar
     runs-on: ubuntu-latest
+    outputs:
+      image-tags: ${{ steps.meta.outputs.tags }}
     if: github.ref != 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4

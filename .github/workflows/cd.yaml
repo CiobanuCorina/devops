@@ -41,7 +41,7 @@ jobs:
             --create-namespace \
             --wait \
             --timeout 15m \
-            --set image.tag=latest
+            --set image.tag=${{ needs.build.outputs.image-tags }}
 
       - name: Verify deployment
         run: |
