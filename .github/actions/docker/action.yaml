@@ -31,4 +31,4 @@ runs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: baisnake/devops:latest
+        tags: ${{ steps.meta.outputs.tags }}
