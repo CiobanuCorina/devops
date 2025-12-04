@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: deployment-test-service
   namespace: {{ .Values.namespace }}
+  annotations:
+    oci.oraclecloud.com/load-balancer-type: "nlb"
 spec:
   selector:
     app: {{ .Values.name }}
