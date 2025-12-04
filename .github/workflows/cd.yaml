@@ -47,6 +47,7 @@ jobs:
             --wait \
             --timeout 15m \
             --set image.tag=${{ needs.build.outputs.image-tags }}
+            --set service.subnetId=${{ secrets.OCI_SUBNET_ID }}
 
       - name: Verify deployment
         run: |
