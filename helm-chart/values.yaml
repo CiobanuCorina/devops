@@ -9,7 +9,7 @@ container:
   port: 8080
 service:
   type: LoadBalancer
-  port: 80
+  port: 8080
   targetPort: 8080
   nodePort: 30080
 secret:
