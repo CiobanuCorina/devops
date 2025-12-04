@@ -46,8 +46,7 @@ jobs:
             --create-namespace \
             --wait \
             --timeout 15m \
-            --set image.tag=${{ needs.build.outputs.image-tags }}, \
-            service.subnetId=${{ secrets.OCI_SUBNET_ID }}
+            --set image.tag=${{ needs.build.outputs.image-tags }},service.subnetId=${{ secrets.OCI_SUBNET_ID }}
 
       - name: Verify deployment
         run: |
