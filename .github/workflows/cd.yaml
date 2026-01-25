@@ -37,7 +37,6 @@ jobs:
         run: |
           helm upgrade --install release1 $GITHUB_WORKSPACE/helm-chart \
             --namespace coriolesea-dev \
-            --create-namespace \
             --wait \
             --timeout 15m \
             --set image.tag=${{ needs.build.outputs.image-tags }}
