@@ -36,7 +36,7 @@ jobs:
       - name: Deploy Helm chart
         run: |
           helm upgrade --install release1 $GITHUB_WORKSPACE/helm-chart \
-            --namespace default \
+            --namespace coriolesea-dev \
             --create-namespace \
             --wait \
             --timeout 15m \
@@ -45,19 +45,19 @@ jobs:
       - name: Verify deployment
         run: |
           echo "=== Helm Release Status ==="
-          helm status release1 --namespace default
+          helm status release1 --namespace coriolesea-dev
           
           echo ""
           echo "=== Pods ==="
-          kubectl get pods --namespace default -l app.kubernetes.io/name=deployment-test
+          kubectl get pods --namespace coriolesea-dev -l app.kubernetes.io/name=deployment-test
           
           echo ""
           echo "=== Services ==="
-          kubectl get svc --namespace default
+          kubectl get svc --namespace coriolesea-dev
           
           echo ""
           echo "=== Deployment Status ==="
-          kubectl rollout status deployment/deployment-test --namespace default
+          kubectl rollout status deployment/deployment-test --namespace coriolesea-dev
 #    steps:
 #      - name: Trigger Render Deploy
 #        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
