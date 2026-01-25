@@ -18,7 +18,7 @@ public class HelloControllerTest {
 
     @Test
     void testHello() throws Exception {
-        String expected = "Hello World!";
+        String expected = "Hello world!";
         mockMvc.perform(
                         get("/")
                                 .contentType(MediaType.APPLICATION_JSON)
