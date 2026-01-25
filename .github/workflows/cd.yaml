@@ -17,18 +17,14 @@ jobs:
         github.ref == 'refs/heads/qa' && 'qa' ||
         'dev'
       }}
-    env:
-      OPENSHIFT_SERVER_URL: "https://api.rm3.7wse.p1.openshiftapps.com:6443"
-      OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_DEV_TOKEN }}
-      OPENSHIFT_NAMESPACE: "coriolesea-dev"
     steps:
       - uses: actions/checkout@v4
       - name: Authenticate and set context
         uses: redhat-actions/oc-login@v1
         with:
-          openshift_server_url: ${{ env.OPENSHIFT_SERVER_URL }}
-          openshift_token: ${{ env.OPENSHIFT_TOKEN }}
-          namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+          openshift_server_url: "https://api.rm3.7wse.p1.openshiftapps.com:6443"
+          openshift_token: ${{ secrets.OPENSHIFT_DEV_TOKEN }}
+          namespace: "coriolesea-dev"
       - name: Setup Helm
         uses: azure/setup-helm@v3
         with:
