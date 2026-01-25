@@ -4,6 +4,8 @@ on:
   push:
     branches-ignore:
       - master
+env:
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_DEV_TOKEN }}
 
 jobs:
   build:
@@ -23,7 +25,7 @@ jobs:
         uses: redhat-actions/oc-login@v1
         with:
           openshift_server_url: "https://api.rm3.7wse.p1.openshiftapps.com:6443"
-          openshift_token: ${{ secrets.OPENSHIFT_DEV_TOKEN }}
+          openshift_token: ${{ env.OPENSHIFT_TOKEN }}
           namespace: "coriolesea-dev"
       - name: Setup Helm
         uses: azure/setup-helm@v3
