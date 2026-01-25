@@ -4,6 +4,9 @@ metadata:
   name: deployment-test-route
   namespace: {{ .Values.namespace }}
 spec:
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
   to:
     kind: Service
     name: deployment-test-service
