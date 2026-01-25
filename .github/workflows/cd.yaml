@@ -18,22 +18,17 @@ jobs:
         'dev'
       }}
     env:
-      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
-      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
-      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
-      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
-      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+      OPENSHIFT_SERVER_URL: "https://api.rm3.7wse.p1.openshiftapps.com:6443"
+      OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_DEV_TOKEN }}
+      OPENSHIFT_NAMESPACE: "coriolesea-dev"
     steps:
       - uses: actions/checkout@v4
-      - name: Configure OCI CLI and Kubectl for OKE
-        uses: oracle-actions/configure-kubectl-oke@v1.5.0
+      - name: Authenticate and set context
+        uses: redhat-actions/oc-login@v1
         with:
-          cluster: ${{ secrets.OKE_CLUSTER_OCID }}
-      - name: Verify cluster connection
-        run: |
-          kubectl cluster-info
-          kubectl get nodes
-
+          openshift_server_url: ${{ env.OPENSHIFT_SERVER_URL }}
+          openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+          namespace: ${{ env.OPENSHIFT_NAMESPACE }}
       - name: Setup Helm
         uses: azure/setup-helm@v3
         with:
