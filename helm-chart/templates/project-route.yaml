@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: deployment-test-route
+  namespace: {{ .Values.namespace }}
+spec:
+  to:
+    kind: Service
+    name: deployment-test-service
+  port:
+    targetPort: 8080
