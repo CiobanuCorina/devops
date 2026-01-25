@@ -18,16 +18,16 @@ jobs:
       }}
     steps:
       - uses: actions/checkout@v4
+      - name: Install oc cli
+        uses: redhat-actions/oc-installer@v1
+        with:
+           oc_version: 'latest'
       - name: Authenticate and set context
         uses: redhat-actions/oc-login@v1
         with:
           openshift_server_url: "https://api.rm3.7wse.p1.openshiftapps.com:6443"
           openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
           namespace: "coriolesea-dev"
-      - name: Install oc cli
-        uses: redhat-actions/oc-installer@v1
-        with:
-           oc_version: 'latest'
       - name: Setup Helm
         uses: azure/setup-helm@v3
         with:
