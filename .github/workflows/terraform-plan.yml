@@ -7,6 +7,7 @@ env:
   TF_API_TOKEN: "${{ secrets.TF_TOKEN }}"
   TF_WORKSPACE: "devops"
   CONFIG_DIRECTORY: "./terraform"
+  TF_WORKSPACE_ID: ${{ secrets.TF_WORKSPACE_ID }}
 
 jobs:
   terraform:
@@ -20,6 +21,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Set image.tag variable in TFC
+        run: |
+          curl \
+            --header "Authorization: Bearer ${{ secrets.TF_API_TOKEN }}" \
+            --header "Content-Type: application/vnd.api+json" \
+            --request POST \
+            --data '{
+              "data": {
+                "type": "vars",
+                "attributes": {
+                  "key": "image_tag",
+                  "value": "${{ github.event.inputs.image_tag }}",
+                  "category": "terraform"
+                }
+              }
+            }' \
+            https://app.terraform.io/api/v2/workspaces/${{ env.TF_WORKSPACE_ID }}/vars
 
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
