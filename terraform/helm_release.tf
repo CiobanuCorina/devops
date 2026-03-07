@@ -10,6 +10,7 @@ resource "helm_release" "devops_helm" {
   repository      = "https://CiobanuCorina.github.io/devops"
   chart = "devops-chart"
   namespace  = var.namespace
+  replace      = true
 
   set {
       name  = "image.tag"
