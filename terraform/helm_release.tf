@@ -6,7 +6,7 @@ provider "helm" {
 }
 
 resource "helm_release" "devops_helm" {
-  name       = "devops-helm"
+  name       = "devops"
   repository      = "https://CiobanuCorina.github.io/devops"
   chart = "devops-chart"
   namespace  = var.namespace

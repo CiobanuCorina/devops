@@ -35,18 +35,17 @@ jobs:
             curl \
               --header "Authorization: Bearer ${{ env.TF_API_TOKEN }}" \
               --header "Content-Type: application/vnd.api+json" \
-              --request POST \
+              --request PATCH \
               --data '{
-                "data": {
-                  "type": "vars",
-                  "attributes": {
-                    "key": "image_tag",
-                    "value": "${{ inputs.image_tag }}",
-                    "category": "terraform"
-                  }
-                }
+                 "data": {
+                 "type": "vars",
+                 "id": "image_tag",
+                 "attributes": {
+                   "value": "${{ inputs.image_tag }}"
+                 }
+               }
               }' \
-              https://app.terraform.io/api/v2/workspaces/${{ env.TF_WORKSPACE_ID }}/vars
+              https://app.terraform.io/api/v2/workspaces/$WORKSPACE_ID/vars/image_tag
 
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
