@@ -13,3 +13,8 @@ variable "namespace" {
   type        = string
   description = "Namespace to deploy to - we are constrained to namespace in OpenShift sandbox env"
 }
+
+variable "image_tag" {
+  type    = string
+  default = "latest"
+}
