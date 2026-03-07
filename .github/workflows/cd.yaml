@@ -42,7 +42,7 @@ jobs:
     secrets: inherit
   terraform-apply:
     uses: ./.github/workflows/terraform-apply.yml
-    needs: terraform-plan
+    needs: [build, terraform-plan]
     secrets: inherit
     with:
       image_tag: ${{ needs.build.outputs.image-tags }}
