@@ -18,9 +18,11 @@ jobs:
 #      }}
   terraform-plan:
     uses: ./.github/workflows/terraform-plan.yml
+    needs: build
     secrets: inherit
   terraform-apply:
     uses: ./.github/workflows/terraform-apply.yml
+    needs: terraform-plan
     secrets: inherit
 #    steps:
 #      - uses: actions/checkout@v4
