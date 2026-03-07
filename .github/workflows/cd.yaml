@@ -8,14 +8,14 @@ jobs:
   build:
     uses: ./.github/workflows/ci.yml
     secrets: inherit
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment: >-
-      ${{
-        github.ref == 'refs/heads/qa' && 'qa' ||
-        'dev'
-      }}
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    environment: >-
+#      ${{
+#        github.ref == 'refs/heads/qa' && 'qa' ||
+#        'dev'
+#      }}
   terraform-plan:
     uses: ./.github/workflows/terraform-plan.yml
     secrets: inherit

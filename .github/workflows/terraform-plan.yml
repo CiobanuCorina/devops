@@ -12,6 +12,11 @@ jobs:
   terraform:
     name: "Terraform Plan"
     runs-on: ubuntu-latest
+    environment: >-
+      ${{
+        github.ref == 'refs/heads/qa' && 'qa' ||
+        'dev'
+      }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
