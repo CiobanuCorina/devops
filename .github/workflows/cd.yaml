@@ -45,7 +45,7 @@ jobs:
     needs: [build, terraform-plan]
     secrets: inherit
     with:
-      image_tag: ${{ needs.build.outputs.image-tags }}
+      image_tag: ${{ needs.build.outputs['image-tags'] || 'latest' }}
 #    steps:
 #      - uses: actions/checkout@v4
 #      - name: Install oc cli
