@@ -19,7 +19,7 @@ spec:
         - name: {{ .Values.secret.keyname }}
       containers:
         - name: deployment-test
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.container.port }}
