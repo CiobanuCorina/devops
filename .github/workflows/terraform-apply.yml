@@ -32,6 +32,11 @@ jobs:
 
       - name: Set image.tag variable in TFC
         run: |
+          VAR_ID=$(curl -s \
+          --header "Authorization: Bearer ${{ env.TF_API_TOKEN }}" \
+          --header "Content-Type: application/vnd.api+json" \
+          "https://app.terraform.io/api/v2/workspaces/${{ env.TF_WORKSPACE_ID }}/vars" \
+          | jq -r '.data[] | select(.attributes.key == "image_tag") | .id')
             curl \
               --header "Authorization: Bearer ${{ env.TF_API_TOKEN }}" \
               --header "Content-Type: application/vnd.api+json" \
@@ -39,13 +44,13 @@ jobs:
               --data '{
                  "data": {
                  "type": "vars",
-                 "id": "image_tag",
+                 "id": "$VAR_ID",
                  "attributes": {
                    "value": "${{ inputs.image_tag }}"
                  }
                }
               }' \
-              https://app.terraform.io/api/v2/workspaces/$WORKSPACE_ID/vars/image_tag
+              https://app.terraform.io/api/v2/workspaces/${{ env.TF_WORKSPACE_ID }}/vars/$VAR_ID
 
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
