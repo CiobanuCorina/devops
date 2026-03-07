@@ -7,6 +7,7 @@ provider "helm" {
 
 resource "helm_release" "devops" {
   name       = "devops"
-  chart      = file("${path.module}/helm-chart")
+  repository      = "https://CiobanuCorina.github.io/devops"
+  chart = "helm-chart"
   namespace  = var.namespace
 }
