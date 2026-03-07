@@ -33,7 +33,7 @@ jobs:
                 "type": "vars",
                 "attributes": {
                   "key": "image_tag",
-                  "value": "${{ github.event.inputs.image_tag }}",
+                  "value": "${{ inputs.image_tag }}",
                   "category": "terraform"
                 }
               }

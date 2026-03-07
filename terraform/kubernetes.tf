@@ -3,9 +3,9 @@ provider "kubernetes" {
   token = var.openshift_token
 }
 
-data "kubernetes_service" "devops-service" {
-  depends_on = [helm_release.devops-helm]
+data "kubernetes_service" "devops_service" {
+  depends_on = [helm_release.devops_helm]
   metadata {
-    name = "devops-service"
+    name = "devops_service"
   }
 }
