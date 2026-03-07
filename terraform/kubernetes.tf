@@ -8,4 +8,5 @@ data "kubernetes_service_v1" "devops_service" {
   metadata {
     name = "devops-service"
   }
+  namespace  = var.namespace
 }
