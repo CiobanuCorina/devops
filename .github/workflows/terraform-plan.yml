@@ -25,7 +25,7 @@ jobs:
       - name: Set image.tag variable in TFC
         run: |
           curl \
-            --header "Authorization: Bearer ${{ secrets.TF_API_TOKEN }}" \
+            --header "Authorization: Bearer ${{ env.TF_API_TOKEN }}" \
             --header "Content-Type: application/vnd.api+json" \
             --request POST \
             --data '{
